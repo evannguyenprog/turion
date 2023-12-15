@@ -18,6 +18,11 @@ public class ImageService {
 
     private static final Logger log = LoggerFactory.getLogger(SatelliteService.class);
 
+    /**
+     * Get Images by satelliteid
+     * @param id
+     * @return list of Image objects
+     */
     public List<Image> getImagesBySatellite(Long id) {
         List<Image> images = imageRepository.findAllImagesById(id);
         if(images.isEmpty()){

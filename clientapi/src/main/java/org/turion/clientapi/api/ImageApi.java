@@ -18,11 +18,11 @@ public class ImageApi {
     @Autowired
     ImageService imageService;
 
-        /**
+    /**
      * Get images of the tracked client satellite that were taken by our satellite.
-     * GET ALL IMAGES, Returns a LIST
+     * Get all images
      * @param id
-     * @return
+     * @return list of images
      */
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)

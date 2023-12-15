@@ -20,14 +20,9 @@ public class ImageRequestApi {
     @Autowired
     ImageRequestService imageRequestService;
 
-
-    //Get images of the tracked client satellite that were taken by our satellite.
-    //GET ALL IMAGES, LIST
-
-    /**
-     *
+    /** Get all image requests for given satellite id
      * @param satelliteId
-     * @return
+     * @return list of imagerequests
      */
     @GetMapping("/{satelliteId}")
     @ResponseStatus(HttpStatus.OK)
@@ -35,6 +30,11 @@ public class ImageRequestApi {
         return imageRequestService.findAllImageRequestsBySatelliteId(satelliteId);
     }
 
+    /**
+     * Return all image requests
+     * For Testing and Visualization purposes
+     * @return list of image requests
+     */
     @GetMapping("/all")
     @ResponseStatus(HttpStatus.OK)
     public List<ImageRequest> getAllImageRequests(){
@@ -43,7 +43,8 @@ public class ImageRequestApi {
 
 
     /**
-     *
+     * Create an image request
+     * Body contains satellite id
      * @param imageRequest
      */
     @PostMapping()

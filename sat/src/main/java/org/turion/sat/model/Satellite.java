@@ -19,8 +19,5 @@ public class Satellite {
     @JsonProperty("name")
     private String name;
 
-//    @JsonProperty("imagePath")
-//    private String imagePath;
-
 }
 

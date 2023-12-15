@@ -14,20 +14,9 @@ public class SatelliteApi {
     @Autowired
     SatelliteService satelliteService;
 
-//    /**
-//     * Get images of the tracked client satellite that were taken by our satellite.
-//     * GET ALL IMAGES, Returns a LIST
-//     * @param id
-//     * @return
-//     */
-//    @GetMapping("/{id}")
-//    @ResponseStatus(HttpStatus.OK)
-//    public List<String> getImagesBySatellite(@PathVariable Long id){
-//        return satelliteService.getImagesBySatellite(id);
-//    }
-
     /**
-     *
+     *  Create satellite to be tracked
+     *  Body contains name of satellite
      * @param satellite
      */
     @PostMapping()

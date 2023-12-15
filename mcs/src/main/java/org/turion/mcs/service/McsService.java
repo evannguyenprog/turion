@@ -21,6 +21,7 @@ import java.util.List;
 @Service
 public class McsService {
 
+    //logger declaration for log statements
     private static final Logger log = LoggerFactory.getLogger(McsService.class);
 
     @Autowired
@@ -31,9 +32,9 @@ public class McsService {
 
 
     @Autowired
-    private RestTemplate restTemplate;  // Assuming you have a RestTemplate bean configured
+    private RestTemplate restTemplate;
 
-    // The URL of the Satellite API
+    // URL of the Satellite API
     private static final String SATELLITE_API_URL = "http://sat:8083/satellites";
 
     /**
@@ -42,7 +43,7 @@ public class McsService {
      * For the image requests with the CREATED status, send an API call to the satellite to initiate fulfilling the image requests
      * Then download all the images from the satellite
      */
-    @Scheduled(fixedRate = 30000)  // Adjust the rate as needed
+    @Scheduled(fixedRate = 30000)  // Adjust the rate as needed, current @ every 30 seconds
     public void communicateWithSatellite() {
         log.info("Start communication with the satellite...");
 
@@ -71,7 +72,7 @@ public class McsService {
             // Make a POST request to the Satellite API
             restTemplate.postForEntity(SATELLITE_API_URL + "/" + request.getSatelliteId() + "/imaging-request?imageRequestId=" + request.getId(), request, Void.class);
 
-            // Update the status of the request in the database (Assuming you have a setStatus method)
+            // Update the status of the request in the database
             request.setStatus(StatusEnum.PENDING);
             imageRequestRepository.save(request);
             log.info("Imaging request sent to satellite: {}", request);
@@ -81,7 +82,7 @@ public class McsService {
     }
 
     /**
-     * Make an API call to satellite to download all images from satellite local storage
+     * Make an API call to satellite to download all images from satellite local storage(cache)
      * For the returned images, get the associated image request, then update its status to DOWNLOADED
      */
     private void downloadAllImagesFromSatellite(List<ImageRequest> requests) {
@@ -90,8 +91,6 @@ public class McsService {
 
         for (ImageRequest request : requests){
             // Make a GET request to the Satellite API to download all images
-//            List<Image> downloadedImages = restTemplate.getForObject(
-//                    SATELLITE_API_URL + "/" + request.getSatelliteId() + "/download", List.class);
             ResponseEntity<List<Image>> responseEntity = restTemplate.exchange(
                     SATELLITE_API_URL + "/" + request.getSatelliteId() + "/download",
                     HttpMethod.GET,

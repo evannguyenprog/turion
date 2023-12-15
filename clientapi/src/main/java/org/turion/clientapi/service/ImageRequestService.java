@@ -15,11 +15,11 @@ public class ImageRequestService {
     @Autowired
     private ImageRequestRepository imageRequestRepository;
 
-
     private static final Logger log = LoggerFactory.getLogger(ImageRequestService.class);
 
     /**
-     * Write what the method is doing here
+     * Find all imagerequests by satellite id
+     * Passes satellite id to db query to return all imagerequests where satellite id = request
      * @return list of Images for a specific client satellite
      */
     public List<String> findAllImageRequestsBySatelliteId(Long satelliteId) {
@@ -30,7 +30,13 @@ public class ImageRequestService {
         return imageRequests;
     }
 
-
+    /**
+     * Create an image request for given satellite
+     * Sets status enum to CREATED
+     * Saves to image request repo
+     * @param imageRequest
+     * @return imgRequest
+     */
     public ImageRequest createImageRequest(ImageRequest imageRequest) {
         imageRequest.setStatus(StatusEnum.CREATED);
         ImageRequest imgRequest = imageRequestRepository.save(imageRequest);
@@ -38,6 +44,12 @@ public class ImageRequestService {
         return imgRequest;
     }
 
+    /**
+     * Find all image requests
+     * Gets all image requests from image request table
+     * For visualization / testing purposes
+     * @return list of image requests
+     */
     public List<ImageRequest> findAllImageRequests() {
         List<ImageRequest> allImgRequest = imageRequestRepository.findAllImageRequests();
         return allImgRequest;

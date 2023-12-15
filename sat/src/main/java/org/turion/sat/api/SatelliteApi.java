@@ -19,7 +19,7 @@ public class SatelliteApi {
 
     /**
      * Get images of the tracked client satellite that were taken by our satellite.
-     * GET ALL IMAGES, Returns a LIST
+     * Get all images, Returns a List of Image objects
      * @param id
      * @return
      */
@@ -30,7 +30,6 @@ public class SatelliteApi {
     }
 
     private static final Logger log = LoggerFactory.getLogger(SatelliteService.class);
-
 
     /**
      * Handles image requests
