@@ -133,4 +133,5 @@ public class McsService {
 
         log.info("Image request status updated for all images.");
     }
+
 }

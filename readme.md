@@ -47,3 +47,5 @@ satellite, image_request, and image tables
 
 MCS executes every 30 seconds to simulate the intermittent messaging between the satellite and station
 Executes based off image requests within db, while also downloading all images in satellite local cache
+
+Testing implemented with JUnit and Mockito, within test directories within each container

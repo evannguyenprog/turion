@@ -25,7 +25,8 @@ dependencies {
 	implementation 'org.postgresql:postgresql'
 	implementation 'org.springframework.boot:spring-boot-starter-test'
 	implementation 'org.projectlombok:lombok:1.18.30'
-	annotationProcessor 'org.projectlombok:lombok:1.18.22'
+    implementation 'junit:junit:4.13.1'
+    annotationProcessor 'org.projectlombok:lombok:1.18.22'
 	implementation 'com.h2database:h2:1.4.200'
 	implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
 
