@@ -20,11 +20,11 @@ a794f35adbc4   sat:image         "java -jar sat.jar"      2 hours ago   Up 5 sec
 446f3e8ec6ca   postgres:latest   "docker-entrypoint.s…"   2 hours ago   Up 6 seconds   0.0.0.0:5431->5432/tcp   turion-postgres-1
 ```
 
-- Satellite Service runs on port 8083
+- Satellite Service runs on port 8083 | Container acts as satellite, able to accept imaging requests of other satellites, storage images locally, and communicate with the mcs
 
-- MCS runs on port 8082
+- MCS runs on port 8082	|  Communicates with the Satellite service intermittently to download images and transmit image requests
 
-- ClientApi runs on port 8081
+- ClientApi runs on port 8081 | API endpoints to create new tracked satellite, send an image request of a satellite, and get all images of a satellite
 
 - Postgres db runs on port 5432
 
@@ -49,3 +49,9 @@ MCS executes every 30 seconds to simulate the intermittent messaging between the
 Executes based off image requests within db, while also downloading all images in satellite local cache
 
 Testing implemented with JUnit and Mockito, within test directories within each container
+
+Future expansions revolve around:
+- More detailed schema
+- Implementing a UI
+- Updating image storage and transportation
+- Potential for scp and cron job for faster image download
