@@ -1,0 +1,102 @@
+{
+	"info": {
+		"_postman_id": "a11a525d-e3ee-4a3f-a636-140d100eaa28",
+		"name": "turion",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31442154"
+	},
+	"item": [
+		{
+			"name": "Add Satellite",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"client2\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8081/satellites",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"satellites"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Image Request For Satellite",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"satelliteId\": 8\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8081/image-request",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"image-request"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Images For Passed Satellite",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8081/get-images/1",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"get-images",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Image Requests (For Testing Visualization)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8081/image-request/all",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"image-request",
+						"all"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
