@@ -1,8 +1,12 @@
-package org.turion.mcs.model;
+package org.turion.clientapi.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
-import javax.persistence.*;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Data
 @Entity

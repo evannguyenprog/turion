@@ -4,7 +4,7 @@ WORKDIR /app
 
 RUN apt-get update && apt-get install
 
-COPY target/mcs.jar /app
+COPY build/libs/mcs.jar /app
 
 CMD ["java", "-jar", "mcs.jar"]
 # This commented out ENTRYPOINT will start the container but not

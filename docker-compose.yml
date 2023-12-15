@@ -2,47 +2,63 @@ version: '3'
 
 services:
   mcs:
-    image: mcs-image
+    image: mcs:image
+    hostname: mcs
     ports:
       - "8082:8082"
+    build:
+      context: ./mcs
+      dockerfile: Dockerfile
     depends_on:
-      - satellite
-      - satellite
+      - sat
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5433/mcsdb
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/postgres
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: root
 
-  satellite:
-    image: satellite-image
+  sat:
+    image: sat:image
+    hostname: sat
     ports:
       - "8083:8083"
-
-  satellite-api:
     build:
-      context: ./path/to/satellite
+      context: ./sat
       dockerfile: Dockerfile
+    depends_on:
+      - client-api
+
+  client-api:
+    image: clientapi:image
+    hostname: clientapi
     ports:
       - "8081:8081"
+    build:
+      context: ./clientapi
+      dockerfile: Dockerfile
     depends_on:
-      - satellite
+      - postgres
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/postgres
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: root
 
   postgres:
-    image: postgres:14.3-alpine
+    image: postgres:latest
     ports:
-      - "5433:5433"
+      - "5431:5432"
     environment:
       POSTGRES_DB: postgres
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: root
-
-  pgadmin:
-    image: dpage/pgadmin4
-    ports:
-      - "5001:80"
-    environment:
-      PGADMIN_DEFAULT_EMAIL: postgres@takehome.com
-      PGADMIN_DEFAULT_PASSWORD: root
-      PGADMIN_LISTEN_PORT: 80
-    depends_on:
-      - postgres
+    volumes:
+      - ./sql:/docker-entrypoint-initdb.d
+#  pgadmin:
+#    image: dpage/pgadmin4
+#    ports:
+#      - "5001:80"
+#    environment:
+#      PGADMIN_DEFAULT_EMAIL: postgres@takehome.com
+#      PGADMIN_DEFAULT_PASSWORD: root
+#      PGADMIN_LISTEN_PORT: 80
+#    depends_on:
+#      - postgres

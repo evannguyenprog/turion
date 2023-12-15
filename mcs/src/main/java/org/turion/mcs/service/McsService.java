@@ -34,7 +34,7 @@ public class McsService {
     private RestTemplate restTemplate;  // Assuming you have a RestTemplate bean configured
 
     // The URL of the Satellite API
-    private static final String SATELLITE_API_URL = "http://localhost:8083/satellites";
+    private static final String SATELLITE_API_URL = "http://sat:8083/satellites";
 
     /**
      * Run on a fixed interval
@@ -122,10 +122,8 @@ public class McsService {
      */
     private void updateImageRequestStatus(List<Image> images, StatusEnum newStatus) {
         log.info("Updating image request status...");
-        log.info("Type of objects in 'images': {}", images.get(0).getClass());
 
         for (Image image : images) {
-//            log.info("Image ID: {}", image.getId());
             ImageRequest imageRequest = imageRequestRepository.findByImageRequestId(image.getImageRequestId());
             if (imageRequest != null) {
                 imageRequest.setStatus(newStatus);

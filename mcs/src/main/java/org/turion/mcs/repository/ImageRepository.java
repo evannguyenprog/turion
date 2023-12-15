@@ -13,10 +13,5 @@ import java.util.List;
 @Repository
 public interface ImageRepository  extends CrudRepository<Image, Long> {
 
-
-//    List<ImageRequest> findAllByStatus(StatusEnum status);
-
-    @Query(value = "SELECT image_path FROM image_request WHERE image_path = :id", nativeQuery = true)
-    ImageRequest findByImagePath(String imagePath);
 }
 
